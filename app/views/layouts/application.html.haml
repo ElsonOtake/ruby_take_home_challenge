@@ -2,13 +2,23 @@
 %html
   %head
     %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
-    %title RubyTakeHomeChallenge
-    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    %title CryptoWallet
+    %link{href: "//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic", rel: "stylesheet"}/
+    %link{href: "//cdn.rawgit.com/necolas/normalize.css/master/normalize.css", rel: "stylesheet"}/
+    %link{href: "//cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css", rel: "stylesheet"}/
+    %link{crossorigin: "anonymous", href: "https://use.fontawesome.com/releases/v5.3.1/css/all.css", integrity: "sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU", rel: "stylesheet"}/
+
     = csrf_meta_tags
     = csp_meta_tag
-    = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    = javascript_importmap_tags
+    = stylesheet_link_tag 'application', media: 'all'
+
   %body
-    %p.notice= notice
-    %p.alert= alert
-    = yield
+    .container
+      .layout
+        .layout__notifications
+          - if notice
+            .notification.is-info= notice
+          - if alert
+            .notification.is-warning= alert
+        .layout__content
+          = yield

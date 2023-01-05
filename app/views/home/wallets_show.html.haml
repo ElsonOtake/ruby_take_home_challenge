@@ -1,0 +1,65 @@
+- if user_signed_in?
+  = link_to('Logout', destroy_user_session_path, method: :delete, class: 'button--logout')
+- else
+  = link_to('Login', new_user_session_path, class: 'button--logout')
+%h3 Transactions for 0xec690940081e780ae3310c88eb3f4c75622988ec
+
+.row.stats
+  .column
+    %strong Summary:
+  .column
+    %strong 4
+    Transactions
+  .column
+    -# TODO: Remember to change currency symbol
+    %strong 0.00558 ETH
+    Balance
+
+%table
+  %thead
+    %tr
+      %th Details
+      -# TODO: Remember to change currency symbol
+      %th Amount (ETH)
+      %th Fee (ETH)
+      %th Date
+  %tbody
+    %tr.transaction-outcoming
+      %td
+        %i.fas.fa-arrow-down
+        Transfer to
+        0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE
+      %td 1.99958 ETH
+      %td 0.00042 ETH
+      %td 15 days 14 hrs ago
+    %tr.transaction-incoming
+      %td
+        %i.fas.fa-arrow-up
+        Transfer from
+        0xa95350d70b18fa29f6b5eb8d627ceeeee499340d
+      %td 2 ETH
+      %td 0.00126 ETH
+      %td 15 days 14 hrs ago
+    %tr.transaction-outcoming
+      %td
+        %i.fas.fa-arrow-down
+        Transfer to
+        0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be
+      %td 2.994 ETH
+      %td 0.00042 ETH
+      %td 15 days 14 hrs ago
+    %tr.transaction-incoming
+      %td
+        %i.fas.fa-arrow-up
+        Transfer from
+        0xa95350d70B18FA29f6B5EB8D627cEEEEE499340d
+      %td 3 ETH
+      %td 0.00126 ETH
+      %td 15 days 14 hrs ago
+= link_to 'Change currency to PLN', wallets_show_path, class: 'button'
+= link_to 'Back to your wallets', wallets_index_path
+|
+= link_to 'Remove wallet', wallets_index_path
+
+
+

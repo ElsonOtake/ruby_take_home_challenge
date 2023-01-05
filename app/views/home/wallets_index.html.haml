@@ -1,0 +1,29 @@
+- if user_signed_in?
+  = link_to('Logout', destroy_user_session_path, method: :delete, class: 'button--logout')
+- else
+  = link_to('Login', new_user_session_path, class: 'button--logout')
+%h1 Hello #{current_user.email}
+%p Please find list of your monitored wallets attached
+
+%table
+  %thead
+    %tr
+      %th Wallet address
+      %th Number of transactions
+      %th Balance
+      %th
+  %tbody
+    %tr
+      %td 0xEc690940081E780ae3310C88eb3f4C75622988eC
+      %td 4
+      %td 0.00558 ETH
+      %td= link_to 'Show', wallets_show_path
+    %tr
+      %td 0xAcf98E3Fe9dA1bEEFae9a166bB70Ff738e246d06
+      %td 56
+      %td 0.226155642 ETH
+      %td= link_to 'Show', wallets_show_path
+= link_to 'Add Wallet', wallets_new_path, class: 'button'
+
+
+
