@@ -223,6 +223,7 @@ GEM
       rubyzip (>= 1.2.2, < 3.0)
       websocket (~> 1.0)
     sexp_processor (4.16.1)
+    spring (4.1.0)
     sprockets (4.2.0)
       concurrent-ruby (~> 1.0)
       rack (>= 2.2.4, < 4)
@@ -279,6 +280,7 @@ DEPENDENCIES
   rails (~> 7.0.4)
   rspec-rails
   selenium-webdriver
+  spring
   sprockets-rails
   stimulus-rails
   turbo-rails
