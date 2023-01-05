@@ -76,3 +76,6 @@ gem 'devise'
 gem 'haml-rails'
 gem 'html2haml'
 gem 'bulma-rails'
+
+gem 'rest-client'
+gem 'dotenv'
