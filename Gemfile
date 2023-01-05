@@ -73,3 +73,5 @@ group :test do
 end
 
 gem 'devise'
+gem 'haml-rails'
+gem 'html2haml'
