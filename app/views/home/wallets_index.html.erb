@@ -21,7 +21,7 @@
         <td><%= item[:numtx] %></td>
         <td><%= item[:balance].to_f / 10.pow(18) %> ETH</td>
         <td>
-          <%= link_to 'Show', wallets_show_path %>
+          <%= link_to 'Show', wallets_show_path({address: item[:account], numtx: item[:numtx], balance: item[:balance]}) %>
         </td>
       </tr>
     <% end %>
