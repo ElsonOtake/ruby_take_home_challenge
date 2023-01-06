@@ -1,0 +1,98 @@
+<% if user_signed_in? %>
+  <%= button_to('Logout', destroy_user_session_path, method: :delete, class: 'button--logout') %>
+<% else %>
+  <%= link_to('Login', new_user_session_path, class: 'button--logout') %>
+<% end %>
+<h3>Transactions for <%= @address %></h3>
+<div class="row stats">
+  <div class="column">
+    <strong>Summary:</strong>
+  </div>
+  <div class="column">
+    <strong><%= @numtx %></strong>
+    Transactions
+  </div>
+  <div class="column">
+    <% # TODO: Remember to change currency symbol %>
+    <strong><%= @balance.to_f / 10.pow(18) %> ETH</strong>
+    Balance
+  </div>
+</div>
+<table>
+  <thead>
+    <tr>
+      <th>Details</th>
+      <% # TODO: Remember to change currency symbol %>
+      <th>Amount (ETH)</th>
+      <th>Fee (ETH)</th>
+      <th>Date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @transactions.each do |item| %>
+      <% if item[:from].downcase == @address.downcase %>
+        <tr class="transaction-outcoming">
+          <td>
+            <i class="fas fa-arrow-down"></i>
+            Transfer to
+            <%= item[:to] %>
+          </td>
+      <% else %>
+        <tr class="transaction-incoming">
+        <td>
+          <i class="fas fa-arrow-up"></i>
+          Transfer from
+          <%= item[:from] %>
+        </td>
+      <% end %>
+        <td><%= item[:value].to_f / 10.pow(18) %> ETH</td>
+        <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) %> ETH</td>
+        <td><%= item[:timeStamp] %></td>
+      </tr>
+    <%# <tr class="transaction-outcoming">
+      <td>
+        <i class="fas fa-arrow-down"></i>
+        Transfer to
+        0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE
+      </td>
+      <td>1.99958 ETH</td>
+      <td>0.00042 ETH</td>
+      <td>15 days 14 hrs ago</td>
+    </tr>
+    <tr class="transaction-incoming">
+      <td>
+        <i class="fas fa-arrow-up"></i>
+        Transfer from
+        0xa95350d70b18fa29f6b5eb8d627ceeeee499340d
+      </td>
+      <td>2 ETH</td>
+      <td>0.00126 ETH</td>
+      <td>15 days 14 hrs ago</td>
+    </tr>
+    <tr class="transaction-outcoming">
+      <td>
+        <i class="fas fa-arrow-down"></i>
+        Transfer to
+        0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be
+      </td>
+      <td>2.994 ETH</td>
+      <td>0.00042 ETH</td>
+      <td>15 days 14 hrs ago</td>
+    </tr>
+    <tr class="transaction-incoming">
+      <td>
+        <i class="fas fa-arrow-up"></i>
+        Transfer from
+        0xa95350d70B18FA29f6B5EB8D627cEEEEE499340d
+      </td>
+      <td>3 ETH</td>
+      <td>0.00126 ETH</td>
+      <td>15 days 14 hrs ago</td>
+    </tr> %>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'Change currency to PLN', wallets_show_path, class: 'button' %>
+<%= link_to 'Back to your wallets', wallets_index_path %>
+|
+<%= link_to 'Remove wallet', wallets_index_path %>
