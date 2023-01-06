@@ -47,7 +47,7 @@
       <% end %>
         <td><%= item[:value].to_f / 10.pow(18) %> ETH</td>
         <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) %> ETH</td>
-        <td><%= item[:timeStamp] %></td>
+        <td><%= time_ago_in_words(Time.at(item[:timeStamp].to_i)) %></td>
       </tr>
     <%# <tr class="transaction-outcoming">
       <td>
