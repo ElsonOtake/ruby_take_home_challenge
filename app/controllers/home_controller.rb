@@ -11,7 +11,8 @@ class HomeController < ApplicationController
   def wallets_index
     address_initial = [
       '0xEc690940081E780ae3310C88eb3f4C75622988eC',
-      '0xAcf98E3Fe9dA1bEEFae9a166bB70Ff738e246d06'
+      '0xAcf98E3Fe9dA1bEEFae9a166bB70Ff738e246d06',
+      '0xDF828870459aEc77D13D5FE78328c80E776ba071'
     ]
     session[:address_list] = address_initial if session[:address_list].nil?
     @address_list = get_balance(session[:address_list])
@@ -63,7 +64,7 @@ class HomeController < ApplicationController
       module: 'account',
       action: 'txlist',
       address: address,
-      sort: 'asc',
+      sort: 'desc',
       apikey: ENV['API_KEY']
     }
     response = RestClient.get @@url, { params: payload }
