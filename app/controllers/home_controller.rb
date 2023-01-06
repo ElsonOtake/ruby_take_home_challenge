@@ -18,6 +18,10 @@ class HomeController < ApplicationController
   end
 
   def wallets_show
+    @address = params[:address]
+    @numtx = params[:numtx]
+    @balance = params[:balance]
+    @transactions = get_transactions(@address)
   end
 
   def wallets_new
@@ -52,5 +56,17 @@ class HomeController < ApplicationController
       item[:numtx] = get_numtx(item[:account])
     end
     balance
+  end
+
+  def get_transactions(address)
+    payload = {
+      module: 'account',
+      action: 'txlist',
+      address: address,
+      sort: 'asc',
+      apikey: ENV['API_KEY']
+    }
+    response = RestClient.get @@url, { params: payload }
+    JSON.parse(response).with_indifferent_access[:result]
   end
 end
