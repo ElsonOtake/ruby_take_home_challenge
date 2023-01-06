@@ -4,17 +4,17 @@ class HomeController < ApplicationController
   require 'json'
   Dotenv.load
   @@url = 'https://api.etherscan.io/api'
+  $address_initial = [
+    '0xEc690940081E780ae3310C88eb3f4C75622988eC',
+    '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a',
+    '0xdf828870459aec77d13d5fe78328c80e776ba071'
+  ]
 
   def index
   end
 
   def wallets_index
-    address_initial = [
-      '0xEc690940081E780ae3310C88eb3f4C75622988eC',
-      '0xAcf98E3Fe9dA1bEEFae9a166bB70Ff738e246d06',
-      '0xDF828870459aEc77D13D5FE78328c80E776ba071'
-    ]
-    session[:address_list] = address_initial if session[:address_list].nil?
+    session[:address_list] = $address_initial if session[:address_list].nil?
     @address_list = get_balance(session[:address_list])
   end
 
@@ -26,7 +26,7 @@ class HomeController < ApplicationController
   end
 
   def wallets_new
-    
+    puts "wallets new!!!"
   end
 
   private
