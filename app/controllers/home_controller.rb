@@ -25,6 +25,7 @@ class HomeController < ApplicationController
     @address = params[:address]
     @numtx = params[:numtx]
     @balance = params[:balance]
+    @symbol = params[:symbol]
     @transactions = get_transactions(@address)
   end
 
