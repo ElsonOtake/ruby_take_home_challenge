@@ -8,6 +8,6 @@ export default class extends Controller {
     const element = this.addressTarget;
     const address = element.value;
     var link = document.getElementById("link").href;
-    document.getElementById("link").href = link + '?address=' +  address;
+    document.getElementById("link").href += '?address=' +  address;
   }
 }
