@@ -29,7 +29,7 @@
     </tr>
   </thead>
   <tbody>
-    <% if @transactions != 'Error! Invalid address format' %>
+    <% if @transactions.is_a?(Array) %>
       <% @transactions.each do |item| %>
         <% if item[:from].downcase == @address.downcase %>
           <tr class="transaction-outcoming">
