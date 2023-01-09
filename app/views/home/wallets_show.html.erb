@@ -14,7 +14,7 @@
   </div>
   <div class="column">
     <% # TODO: Remember to change currency symbol %>
-    <strong><%= @balance.to_f / 10.pow(18) %> ETH</strong>
+    <strong><%= @balance.to_f / 10.pow(18) %> <%= @symbol %></strong>
     Balance
   </div>
 </div>
@@ -23,8 +23,8 @@
     <tr>
       <th>Details</th>
       <% # TODO: Remember to change currency symbol %>
-      <th>Amount (ETH)</th>
-      <th>Fee (ETH)</th>
+      <th>Amount (<%= @symbol %>)</th>
+      <th>Fee (<%= @symbol %>)</th>
       <th>Date</th>
     </tr>
   </thead>
@@ -46,15 +46,25 @@
             <%= item[:from] %>
           </td>
         <% end %>
-          <td><%= item[:value].to_f / 10.pow(18) %> ETH</td>
-          <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) %> ETH</td>
+          <td><%= item[:value].to_f / 10.pow(18) %> <%= @symbol %></td>
+          <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) %> <%= @symbol %></td>
           <td><%= time_ago_in_words(Time.at(item[:timeStamp].to_i)) %></td>
         </tr>
       <% end %>
     <% end %>
   </tbody>
 </table>
-<%= link_to 'Change currency to PLN', wallets_show_path, class: 'button' %>
+<% if @symbol == 'PLN' %>
+  <%= link_to 'Change currency to ETH', wallets_show_path({address: @address,
+                                                           numtx: @numtx,
+                                                           balance: @balance,
+                                                           symbol: 'ETH'}), class: 'button' %>
+<% else %>
+  <%= link_to 'Change currency to PLN', wallets_show_path({address: @address,
+                                                           numtx: @numtx,
+                                                           balance: @balance,
+                                                           symbol: 'PLN'}), class: 'button' %>
+<% end %>
 <%= link_to 'Back to your wallets', wallets_index_path %>
 |
 <%= link_to 'Remove wallet', wallets_index_path(remove: @address) %>
