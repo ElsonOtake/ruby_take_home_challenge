@@ -1,0 +1,8 @@
+.layout__content
+  %h2 Create wallet
+  %form
+    .field{"data-controller" => "address"}
+      %label Wallet address
+      %br/
+      %input#new_address{"data-address-target" => "address"}/
+      %a#link.button{"data-action" => "address#add_wallet", :href => "wallets_index.html"} Add Wallet
