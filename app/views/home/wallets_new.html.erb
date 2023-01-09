@@ -1,11 +1,11 @@
 <div class="layout__content">
   <h2>Create wallet</h2>
   <form>
-    <div class="field">
-      <label>Wallet address</label>
+    <div class="field" data-controller="address">
+      <label data-controller="hello">Wallet address</label>
       <br/>
       <input id="user_email"></input>
-      <%= link_to "Add Wallet", wallets_index_path, class: 'button' %>
+      <%= link_to "Add Wallet", wallets_index_path, class: 'button', data: { action: "click->address#disconnect"} %>
     </div>
   </form>
 </div>
