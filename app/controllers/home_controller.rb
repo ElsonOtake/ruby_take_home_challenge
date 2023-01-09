@@ -26,7 +26,6 @@ class HomeController < ApplicationController
   end
 
   def wallets_new
-    puts "wallets new!!!"
   end
 
   private
