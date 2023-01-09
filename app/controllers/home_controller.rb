@@ -15,8 +15,8 @@ class HomeController < ApplicationController
 
   def wallets_index
     session[:address_list] = $address_initial if session[:address_list].nil?
-    session[:address_list].push(params[:address]) unless params[:address].nil? || params[:address].empty? ||
-      session[:address_list].include?(params[:address])
+    session[:address_list].push(params[:add]) unless params[:add].nil? || params[:add].empty? ||
+      session[:address_list].include?(params[:add])
     @address_list = get_balance(session[:address_list])
   end
 
