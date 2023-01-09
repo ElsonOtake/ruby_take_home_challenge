@@ -17,6 +17,7 @@ class HomeController < ApplicationController
     session[:address_list] = $address_initial if session[:address_list].nil?
     session[:address_list].push(params[:add]) unless params[:add].nil? || params[:add].empty? ||
       session[:address_list].include?(params[:add])
+    session[:address_list].delete(params[:remove]) unless params[:remove].nil? || params[:remove].empty?
     @address_list = get_balance(session[:address_list])
   end
 
