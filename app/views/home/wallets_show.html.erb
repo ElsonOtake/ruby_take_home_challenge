@@ -3,6 +3,7 @@
 <% else %>
   <%= link_to('Login', new_user_session_path, class: 'button--logout') %>
 <% end %>
+<% eth_to_pln = 5.58 %>
 <h3>Transactions for <%= @address %></h3>
 <div class="row stats">
   <div class="column">
@@ -13,8 +14,11 @@
     Transactions
   </div>
   <div class="column">
-    <% # TODO: Remember to change currency symbol %>
-    <strong><%= @balance.to_f / 10.pow(18) %> <%= @symbol %></strong>
+    <% if @symbol == 'ETH' %>
+      <strong><%= @balance.to_f / 10.pow(18) %> <%= @symbol %></strong>
+    <% else %>
+      <strong><%= @balance.to_f / 10.pow(18) * eth_to_pln %> <%= @symbol %></strong>
+    <% end %>
     Balance
   </div>
 </div>
@@ -22,7 +26,6 @@
   <thead>
     <tr>
       <th>Details</th>
-      <% # TODO: Remember to change currency symbol %>
       <th>Amount (<%= @symbol %>)</th>
       <th>Fee (<%= @symbol %>)</th>
       <th>Date</th>
@@ -46,8 +49,13 @@
             <%= item[:from] %>
           </td>
         <% end %>
-          <td><%= item[:value].to_f / 10.pow(18) %> <%= @symbol %></td>
-          <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) %> <%= @symbol %></td>
+          <% if @symbol == 'ETH' %>
+            <td><%= item[:value].to_f / 10.pow(18) %> <%= @symbol %></td>
+            <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) %> <%= @symbol %></td>
+          <% else %>
+            <td><%= item[:value].to_f / 10.pow(18) * eth_to_pln %> <%= @symbol %></td>
+            <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) * eth_to_pln %> <%= @symbol %></td>
+          <% end %>
           <td><%= time_ago_in_words(Time.at(item[:timeStamp].to_i)) %></td>
         </tr>
       <% end %>
