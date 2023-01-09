@@ -4,8 +4,8 @@
     <div class="field" data-controller="address">
       <label data-controller="hello">Wallet address</label>
       <br/>
-      <input id="user_email"></input>
-      <%= link_to "Add Wallet", wallets_index_path, class: 'button', data: { action: "click->address#disconnect"} %>
+      <input id="new_address" data-address-target="address"></input>
+      <a href="wallets_index.html" id="link" data-action="address#add_wallet">Add Wallet</a>
     </div>
   </form>
 </div>
