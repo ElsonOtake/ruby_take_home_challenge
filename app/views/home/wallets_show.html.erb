@@ -57,4 +57,4 @@
 <%= link_to 'Change currency to PLN', wallets_show_path, class: 'button' %>
 <%= link_to 'Back to your wallets', wallets_index_path %>
 |
-<%= link_to 'Remove wallet', wallets_index_path %>
+<%= link_to 'Remove wallet', wallets_index_path(remove: @address) %>
