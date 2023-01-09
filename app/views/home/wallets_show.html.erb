@@ -29,66 +29,28 @@
     </tr>
   </thead>
   <tbody>
-    <% @transactions.each do |item| %>
-      <% if item[:from].downcase == @address.downcase %>
-        <tr class="transaction-outcoming">
+    <% if @transactions != 'Error! Invalid address format' %>
+      <% @transactions.each do |item| %>
+        <% if item[:from].downcase == @address.downcase %>
+          <tr class="transaction-outcoming">
+            <td>
+              <i class="fas fa-arrow-down"></i>
+              Transfer to
+              <%= item[:to] %>
+            </td>
+        <% else %>
+          <tr class="transaction-incoming">
           <td>
-            <i class="fas fa-arrow-down"></i>
-            Transfer to
-            <%= item[:to] %>
+            <i class="fas fa-arrow-up"></i>
+            Transfer from
+            <%= item[:from] %>
           </td>
-      <% else %>
-        <tr class="transaction-incoming">
-        <td>
-          <i class="fas fa-arrow-up"></i>
-          Transfer from
-          <%= item[:from] %>
-        </td>
+        <% end %>
+          <td><%= item[:value].to_f / 10.pow(18) %> ETH</td>
+          <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) %> ETH</td>
+          <td><%= time_ago_in_words(Time.at(item[:timeStamp].to_i)) %></td>
+        </tr>
       <% end %>
-        <td><%= item[:value].to_f / 10.pow(18) %> ETH</td>
-        <td><%= item[:gasPrice].to_f * item[:gasUsed].to_f / 10.pow(18) %> ETH</td>
-        <td><%= time_ago_in_words(Time.at(item[:timeStamp].to_i)) %></td>
-      </tr>
-    <%# <tr class="transaction-outcoming">
-      <td>
-        <i class="fas fa-arrow-down"></i>
-        Transfer to
-        0x3f5CE5FBFe3E9af3971dD833D26bA9b5C936f0bE
-      </td>
-      <td>1.99958 ETH</td>
-      <td>0.00042 ETH</td>
-      <td>15 days 14 hrs ago</td>
-    </tr>
-    <tr class="transaction-incoming">
-      <td>
-        <i class="fas fa-arrow-up"></i>
-        Transfer from
-        0xa95350d70b18fa29f6b5eb8d627ceeeee499340d
-      </td>
-      <td>2 ETH</td>
-      <td>0.00126 ETH</td>
-      <td>15 days 14 hrs ago</td>
-    </tr>
-    <tr class="transaction-outcoming">
-      <td>
-        <i class="fas fa-arrow-down"></i>
-        Transfer to
-        0x3f5ce5fbfe3e9af3971dd833d26ba9b5c936f0be
-      </td>
-      <td>2.994 ETH</td>
-      <td>0.00042 ETH</td>
-      <td>15 days 14 hrs ago</td>
-    </tr>
-    <tr class="transaction-incoming">
-      <td>
-        <i class="fas fa-arrow-up"></i>
-        Transfer from
-        0xa95350d70B18FA29f6B5EB8D627cEEEEE499340d
-      </td>
-      <td>3 ETH</td>
-      <td>0.00126 ETH</td>
-      <td>15 days 14 hrs ago</td>
-    </tr> %>
     <% end %>
   </tbody>
 </table>
