@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   get 'home/index'
   get 'home/wallets_index', as: :wallets_index

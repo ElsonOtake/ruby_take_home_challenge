@@ -1,22 +1,23 @@
+# frozen_string_literal: true
+
 class HomeController < ApplicationController
   require 'dotenv'
   require 'rest-client'
   require 'json'
   Dotenv.load
   @@url = 'https://api.etherscan.io/api'
-  $address_initial = [
-    '0xEc690940081E780ae3310C88eb3f4C75622988eC',
-    '0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a',
-    '0xdf828870459aec77d13d5fe78328c80e776ba071'
+  $address_initial = %w[
+    0xEc690940081E780ae3310C88eb3f4C75622988eC
+    0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a
+    0xdf828870459aec77d13d5fe78328c80e776ba071
   ]
 
-  def index
-  end
+  def index; end
 
   def wallets_index
     session[:address_list] = $address_initial if session[:address_list].nil?
     session[:address_list].push(params[:add]) unless params[:add].nil? || params[:add].empty? ||
-      session[:address_list].include?(params[:add])
+                                                     session[:address_list].include?(params[:add])
     session[:address_list].delete(params[:remove]) unless params[:remove].nil? || params[:remove].empty?
     @address_list = get_balance(session[:address_list])
   end
@@ -29,8 +30,7 @@ class HomeController < ApplicationController
     @transactions = get_transactions(@address)
   end
 
-  def wallets_new
-  end
+  def wallets_new; end
 
   private
 
@@ -38,13 +38,13 @@ class HomeController < ApplicationController
     payload = {
       module: 'account',
       action: 'txlist',
-      address: address,
+      address:,
       apikey: ENV['API_KEY']
     }
     response = RestClient.get @@url, { params: payload }
     transactions = JSON.parse(response).with_indifferent_access
-    transactions[:status] == '1'? transactions[:result].size : 0
-   end
+    transactions[:status] == '1' ? transactions[:result].size : 0
+  end
 
   def get_balance(address)
     payload = {
@@ -66,7 +66,7 @@ class HomeController < ApplicationController
     payload = {
       module: 'account',
       action: 'txlist',
-      address: address,
+      address:,
       sort: 'desc',
       apikey: ENV['API_KEY']
     }
